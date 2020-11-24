@@ -7,5 +7,13 @@ end
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
   config.vm.network "private_network", ip: "192.168.10.100"
-  config.hostsupdater.aliases = ["development.local"]
+  # config.hostsupdater.aliases = ["development.local"]
+
+  # Sync the app folder
+  # config.vm.synced_folder "path/origin/folder", "path/to/destination/folder"
+  config.vm.synced_folder "app", "/app"
+
+  # run the provision script
+  config.vm.provision "shell", path: "environment/provision.sh"
+
 end
