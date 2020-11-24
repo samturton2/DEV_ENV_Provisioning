@@ -6,8 +6,6 @@ In this context it will be providing our machines with instructions, variables, 
 
 This will mean we can set up a machine to a specific state when turn on.
 
-
-
 ## Provisioning with Vagrant
 ### Core sections of provisioning
 There are some actions that are core to provisioning. These concepts are tool and language agnostic.
@@ -34,7 +32,6 @@ There are some actions that are core to provisioning. These concepts are tool an
   # Sync the app folder
   # config.vm.synced_folder "path/origin/folder", "path/to/destination/folder"
   config.vm.synced_folder "app", "/app"
-
 ```
 - then `vagrant destroy` `vagrant reload` `vagrant up` `vagrant ssh`
 
@@ -44,13 +41,16 @@ This will allow us to set up the machine to state that is desirable for us and a
 
 In order:
 - Create a provion.sh file
+- add anything you want to happen when you open the VM
+```
+sudo apt update
+sudo apt install nginx -y
+```
 - add to vagrantfile
 ```ruby 
   # run the provision script
   config.vm.provision "shell", path: "environment/provision.sh"
-  ```
-  
-
+```
 
 - **Managing and running services in linux**
 - ```sudo systemctl <action> <system>```
@@ -74,7 +74,7 @@ In order:
 - **running tests**
 - `rake spec`
 
-#####Ruby's testing framework is rspec
+##### Ruby's testing framework is rspec
 - rspec needs to be installed
 
 ##### JS package manager is npm (node package manager)
